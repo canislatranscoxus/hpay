@@ -1,0 +1,12 @@
+Django
+
+#payments
+#openpay==0.6
+#requests==2.26.0
+
+
+# payments. Rest API that listens openpay bank trans notification.
+# this library is included at the bottom.
+#djangorestframework==3.12.4
+
+#redis
