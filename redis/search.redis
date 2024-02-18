@@ -1,0 +1,35 @@
+┌─────────────────────────────┐
+│    search house card KEYS   │
+└─────────────────────────────┘
+
+# Get all the keys of House Cards of one ext_num
+KEYS hcard:304abe:*
+
+
+┌─────────────────────────────────────────────┐
+│    Get all the fields of one house_card     │
+└─────────────────────────────────────────────┘
+# Bring House Card of one specific house
+This is useful to bring just ONE house card, to verify if that house is up to date.
+
+HGETALL hcard:<house_id>:<year>
+HGETALL hcard:304abe:2023
+
+┌─────────────────────┐
+│    Search Queries   │
+└─────────────────────┘
+
+# Select *
+# From	 hcard_idx
+# where  year = 2023
+
+FT.SEARCH hcard_idx "@year:[2023 2023]"
+
+-------------------------------------------------------------------------------
+
+# Select *
+# From	 hcard_idx
+# where  house_id = 304 and year = 2023
+
+FT.SEARCH hcard_idx "@house_id:304 @year:[2023 2023]"
+-------------------------------------------------------------------------------

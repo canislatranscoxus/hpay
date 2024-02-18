@@ -1,0 +1,62 @@
+
+┌─────────────────────┐
+│ Ingest sample data  │
+└─────────────────────┘
+
+
+┌─────────────────────┐
+│   Streets  List.    │
+└─────────────────────┘
+
+LPUSH streets Castaña
+LPUSH streets Abedul
+LPUSH streets Pino
+LPUSH streets Encino
+LPUSH streets Cedro
+LPUSH streets Caoba
+LPUSH streets Nogal
+LPUSH streets Cipres
+LPUSH streets Sabino
+
+Lrange streets 0 -1
+
+┌─────────────────────┐
+│ House hash          │
+└─────────────────────┘
+
+HSET house:100:abe house_id 100abe street Abedul ext_num 100 people "Ana,Elsa,Olaf"
+HSET house:101:abe house_id 101abe street Abedul ext_num 101 people "Mary Jane,Peter"
+HSET house:102:abe house_id 102abe street Abedul ext_num 102 people "Miney,Mickey"
+
+HSET house:100:pin house_id 100pin street Pino ext_num 100 people "Donald,Daisy"
+HSET house:101:pin house_id 101pin street Pino ext_num 101 people "Ironman"
+HSET house:102:pin house_id 102pin street Pino ext_num 102 people "Beauty,Beast"
+
+HSET house:200:enc house_id 200enc street Encino ext_num 200 people "Jazmin,Aladdin"
+HSET house:201:enc house_id 201enc street Encino ext_num 201 people "Boo,Choo,Foo"
+HSET house:202:enc house_id 202enc street Encino ext_num 202 people "Ariel,Sebastian"
+
+
+┌─────────────────────┐
+│ House Card          │
+└─────────────────────┘
+
+HSET hcard:100abe:2023	house_id 100abe year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m10 0 m11 0 m12 0
+HSET hcard:101abe:2023	house_id 101abe year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m10 0 m11 0 m12 0
+HSET hcard:102abe:2023	house_id 102abe year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m10 0 m11 0 m12 0
+HSET hcard:100pin:2023	house_id 100pin year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m10 0 m11 0 m12 0
+HSET hcard:101pin:2023	house_id 101pin year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m10 0 m11 0 m12 0
+HSET hcard:102pin:2023	house_id 102pin year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m10 0 m11 0 m12 0
+HSET hcard:200enc:2023	house_id 200enc year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m10 0 m11 0 m12 0
+HSET hcard:201enc:2023	house_id 201enc year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m10 0 m11 0 m12 0
+HSET hcard:202enc:2023	house_id 202enc year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m10 0 m11 0 m12 0
+
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│   Example: Update house_card payment for January, February and March.          │
+└────────────────────────────────────────────────────────────────────────────────┘
+HSET "hcard:304:2023" house_id 304 year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m9 0 m10 0 m11 0 m12 0
+HSET "hcard:304:2023" house_id 304 year 2023 m1 1 m2 1 m3 1
+
+HSET "hcard:200:2023" house_id 304 year 2023 m1 0 m2 0 m3 0 m4 0 m5 0 m6 0 m7 0 m8 0 m9 0 m10 0 m11 0 m12 0
+HSET "hcard:200:2023" house_id 304 year 2023 m1 1 m2 1 m3 0

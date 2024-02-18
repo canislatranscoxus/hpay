@@ -1,0 +1,77 @@
+┌─────────────────────────────────────────────┐
+│    Search Queries for Reports. AGGREGATE    │
+└─────────────────────────────────────────────┘
+
+
+# ----------------------------------------------------------------------------
+Use case: Who are the Defaulters. Who must pay ?
+We are starting November,
+select all the houses that have paid less than 11 months in the year 2023.
+
+SELECT	 *,
+ 	 "@m1+@m2+@m3+@m4+@m5+@m6+@m7+@m8+@m9+@m10+@m11+@m12"  AS paid_months
+
+FROM	  hcard_idx
+GROUP BY @house_id, @year, @paid_months
+HAVING   "@paid_months<11 AND year=2023"
+
+
+FT.AGGREGATE hcard_idx "*"
+APPLY  "@m1+@m2+@m3+@m4+@m5+@m6+@m7+@m8+@m9+@m10+@m11+@m12"  AS paid_months
+GROUPBY 2 @house_id @year @paid_months
+FILTER  "@paid_months<=11 @year==2023"
+
+# ----------------------------------------------------------------------------
+
+Use case:
+We want to see all the houses that have paid exactly 3 months.
+Select all the houses that have paid only 3 months in the year.
+
+SELECT	 *,
+ 	 "@m1+@m2+@m3+@m4+@m5+@m6+@m7+@m8+@m9+@m10+@m11+@m12"  AS paid_months
+
+FROM	  hcard_idx
+GROUP BY @house_id, @paid_months
+HAVING   "@paid_months==3"
+
+
+FT.AGGREGATE hcard_idx "*"
+APPLY  "@m1+@m2+@m3+@m4+@m5+@m6+@m7+@m8+@m9+@m10+@m11+@m12"  AS paid_months
+GROUPBY 2 @house_id @paid_months
+FILTER  "@paid_months==3"
+
+# ----------------------------------------------------------------------------
+
+Use case: We are starting April, and we want to see the houses that are up to date.
+select all the houses that have paid 3 months or more.
+
+SELECT	 *,
+ 	 "@m1+@m2+@m3+@m4+@m5+@m6+@m7+@m8+@m9+@m10+@m11+@m12"  AS paid_months
+
+FROM	  hcard_idx
+GROUP BY @house_id, @paid_months
+HAVING   "@paid_months>=3"
+
+
+FT.AGGREGATE hcard_idx "*"
+APPLY  "@m1+@m2+@m3+@m4+@m5+@m6+@m7+@m8+@m9+@m10+@m11+@m12"  AS paid_months
+GROUPBY 2 @house_id @paid_months
+FILTER  "@paid_months>=3"
+
+
+# ----------------------------------------------------------------------------
+
+Use case: We want to see how many months have paid each house.
+
+SELECT	 *,
+ 	 "@m1+@m2+@m3+@m4+@m5+@m6+@m7+@m8+@m9+@m10+@m11+@m12"  AS paid_months
+
+FROM	  hcard_idx
+GROUP BY @house_id, @paid_months
+
+
+FT.AGGREGATE hcard_idx "*"
+APPLY  "@m1+@m2+@m3+@m4+@m5+@m6+@m7+@m8+@m9+@m10+@m11+@m12"  AS paid_months
+GROUPBY 2 @house_id @paid_months
+
+# ----------------------------------------------------------------------------
